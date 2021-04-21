@@ -1,0 +1,19 @@
+
+    <template name="app">
+        <div class="app">
+            <div class="main">
+                    
+                     <h2>Logged user : {{user}} </h2>
+                    
+                    <ul class="list">
+                        {{#each users}}
+                             {{#if name}}
+                            <li><p>{{name}}</p></li>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+          
+            </div>
+        </div>
+    </template>
+    
