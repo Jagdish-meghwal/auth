@@ -2,16 +2,15 @@
     <template name="app">
         <div class="app">
             <div class="main">
-                    
                      <h2>Logged user : {{user}} </h2>
-                    
-                    <ul class="list">
+                    <table>
+                        <tr><th>Name</th><th>Email</th></tr>
                         {{#each users}}
-                             {{#if name}}
-                            <li><p>{{name}}</p></li>
-                            {{/if}}
-                        {{/each}}
-                    </ul>
+                           {{#if name}}
+                           <tr><td>{{name}}</td><td>{{email}}</td></tr>
+                           {{/if}}
+                       {{/each}}
+                    </table>
           
             </div>
         </div>

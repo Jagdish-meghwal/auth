@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { UsersCollection } from '../imports/db/UsersCollection';
+import { UsersCollection } from '../../imports/db/UsersCollection';
 
 Meteor.methods({
   'user.insert'(user) {
@@ -8,8 +8,9 @@ Meteor.methods({
     var email=user.email;
     var password=user.password;
 
-    var user=!!UsersCollection.find({email:email}).fetch();
-    if(!user){
+    const count= UsersCollection.find({email:email}).count();
+    console.log("------count---"+count);
+    if(count==0){
       UsersCollection.insert({
         name,
         email,
@@ -20,7 +21,7 @@ Meteor.methods({
     else{
       console.log("already exist");
     }
-    console.log("insert method call"+name);
+    console.log("insert method call");
   },
 
 });

@@ -1,15 +1,25 @@
+
 <template name="signup">
-    <h2>SignUp</h2>
-    <div >
-    <form>
-        <label>Name</label><br/>
-        <input name="name" type="text" /><br/>
-        <label>E-mail</label><br/>
-        <input name="email" type="email" /><br/>
-        <label>Password</label><br/>
-        <input name="password" type="password"/><br/>
-        <button type="submit">signup</button>
-    </form>    
-    </div>
+    <body class="signup_form">
+        <form  style="max-width:500px;">
+          <h2>Register Form</h2>
+          <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            <input class="input-field" type="text" placeholder="Name" name="name">
+          </div>
+        
+          <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="input-field" type="text" placeholder="Email" name="email">
+          </div>
+          
+          <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="password" placeholder="Password" name="password">
+          </div>
+        
+          <button type="submit" class="btn">Register</button>
+        </form>
+        </body>
 </template>
 

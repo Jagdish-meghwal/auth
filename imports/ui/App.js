@@ -2,25 +2,25 @@ import './App.html'
 import { UsersCollection } from '../db/UsersCollection';
 
 
-Template.app.onCreated(function() {
+Template.app.onCreated( function () {
         Meteor.subscribe('users');
+
 });
   
 Template.app.helpers({
     user() {
         var email=FlowRouter.getParam('email');
-        var user=UsersCollection.find({email:email}).fetch();
+        var user=UsersCollection.findOne({email:email});
 
-        if(user && user[0].name){
-            user=user[0].name;
-            //console.log('user----'+JSON.stringify(user));
+        if(user && user.name){
+            user=user.name;
             return user;
         }
     },
-    users() {
-            //console.log("------users data "+UsersCollection.find().fetch());
-            return UsersCollection.find().fetch();
+    users(){
+        return UsersCollection.find({},{sort: { createdAt: -1 }}).fetch();
     },
         
+    
 });
   

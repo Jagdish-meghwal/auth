@@ -2,20 +2,22 @@ import './Login.html'
 import { Meteor } from 'meteor/meteor';
 import { UsersCollection } from '../db/UsersCollection';
 
-
-Template.login.onCreated(function () {
+Template.login.onCreated(function() {
     Meteor.subscribe('users');
 });
+
+
 Template.login.events({
     'submit form':function (event){
         event.preventDefault();
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
         
-        var user=!!UsersCollection.find({email:email}).fetch();
+        const count= UsersCollection.find({email:email}).count();
+        const user=UsersCollection.findOne({email:email});
 
-    if(user){
-        if(user[0].password==password){
+    if(count!=0){
+        if(user.password==password){
             console.log("correct password");
             FlowRouter.go('app',{email:email});
         }
@@ -25,7 +27,7 @@ Template.login.events({
         
     }
     else{
-        alert("already exist");
+        alert("User not exist");
     }
     
 
