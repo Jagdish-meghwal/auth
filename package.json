@@ -1,6 +1,7 @@
 {
   "name": "auth",
   "private": true,
+  "main": "lib/route.js",
   "scripts": {
     "start": "meteor run",
     "test": "meteor test --once --driver-package meteortesting:mocha",

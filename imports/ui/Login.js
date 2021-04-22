@@ -4,6 +4,12 @@ import { UsersCollection } from '../db/UsersCollection';
 
 Template.login.onCreated(function() {
     Meteor.subscribe('users');
+    var currentUser=Session.get('currentUser');
+    if(currentUser){
+        alert('already logged in : please logout first');
+        FlowRouter.go('/');
+    }
+
 });
 
 
