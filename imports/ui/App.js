@@ -20,7 +20,11 @@ Template.app.helpers({
         }
     },
     users(){
-        return UsersCollection.find({},{sort: { createdAt: -1 }}).fetch();
+        var currentUser=Session.get('currentUser');
+        if(currentUser){
+            return UsersCollection.find({},{sort: { createdAt: -1 }}).fetch();
+        }
+        
     },
         
     
