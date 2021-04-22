@@ -1,0 +1,1 @@
+export MONGO_URL='mongodb+srv://jagdishmeghwal:jagdish123@cluster0.p7ob2.mongodb.net/<authapp>?retryWrites=true&w=majority' && meteor run

@@ -18,8 +18,8 @@ Template.login.events({
 
     if(count!=0){
         if(user.password==password){
-            console.log("correct password");
-            FlowRouter.go('app',{email:email});
+            Session.set('currentUser',user._id);
+            FlowRouter.go('/');
         }
         else{
             alert("wrong password");

@@ -16,7 +16,9 @@ Template.signup.events({
         const count= UsersCollection.find({email:email}).count();
         if(count==0){
             Meteor.call('user.insert',{name,email,password});
-            FlowRouter.go('app',{email:email});
+            const user=UsersCollection.findOne({email:email});
+            alert('user created please login now');
+            FlowRouter.go('login');
         }
         else{
             alert('already exist');
