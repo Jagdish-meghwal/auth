@@ -3,7 +3,6 @@ import './Signup.html'
 import { UsersCollection } from '../db/UsersCollection';
 
 Template.signup.onCreated(function() {
-    Meteor.subscribe('users');
     var currentUser=Session.get('currentUser');
     if(currentUser){
         alert('already logged in : please logout first');
@@ -18,16 +17,15 @@ Template.signup.events({
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
         
-        const count= UsersCollection.find({email:email}).count();
-        if(count==0){
-            Meteor.call('user.insert',{name,email,password});
-            const user=UsersCollection.findOne({email:email});
-            alert('user created please login now');
-            FlowRouter.go('login');
-        }
-        else{
-            alert('already exist');
-        }
+        Meteor.call('user.insert',{name,email,password},(err,id)=>{
+            if(err){
+                alert(err);
+            }
+            else{
+                Session.set('currentUser',id);
+                FlowRouter.go('/');
+            }
+        });            
     }
-          
+
 });

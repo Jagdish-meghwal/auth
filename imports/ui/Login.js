@@ -3,15 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { UsersCollection } from '../db/UsersCollection';
 
 Template.login.onCreated(function() {
-    Meteor.subscribe('users');
     var currentUser=Session.get('currentUser');
     if(currentUser){
         alert('already logged in : please logout first');
         FlowRouter.go('/');
     }
-
 });
-
 
 Template.login.events({
     'submit form':function (event){
@@ -19,24 +16,15 @@ Template.login.events({
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
         
-        const count= UsersCollection.find({email:email}).count();
-        const user=UsersCollection.findOne({email:email});
-
-    if(count!=0){
-        if(user.password==password){
-            Session.set('currentUser',user._id);
-            FlowRouter.go('/');
-        }
-        else{
-            alert("wrong password");
-        }
-        
-    }
-    else{
-        alert("User not exist");
-    }
-    
-
-    }
-          
+        Meteor.call('user.login',{email,password},function(err,id){
+            
+            if(id){
+                Session.set('currentUser',id);
+                FlowRouter.go('/');
+            }
+            if(err){
+                alert(err);
+            }
+        });
+    }       
 });

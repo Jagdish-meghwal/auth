@@ -5,15 +5,14 @@ import { Session } from 'meteor/session'
 Template.app.onCreated( function () {
         Meteor.subscribe('users');
         var currentUser=Session.get('currentUser');
-        console.log("-----user session----"+currentUser);
-        //if(!currentUser) FlowRouter.go('login');
+        if(!currentUser) FlowRouter.go('/');
 
 });
   
 Template.app.helpers({
     user() {
-        var email=FlowRouter.getParam('email');
-        var user=UsersCollection.findOne({email:email});
+        var currentUser=Session.get('currentUser');
+        var user=UsersCollection.findOne({_id:currentUser});
         if(user && user.name){
             user=user.name;
             return user;
